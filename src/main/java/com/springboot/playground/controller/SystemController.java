@@ -22,6 +22,7 @@ public class SystemController {
 
     @GetMapping("/healthcheck")
     public String healthCheck() {
+        log.info("Performing healthcheck");
         return systemService.healtCheck();
     }
 }
