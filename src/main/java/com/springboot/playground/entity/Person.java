@@ -22,7 +22,7 @@ public class Person {
     private String lastname;
     private Integer age;
     private Gender gender;
-    @OneToOne
+    @OneToOne(cascade = {CascadeType.ALL})
     private Location location;
 
 }
