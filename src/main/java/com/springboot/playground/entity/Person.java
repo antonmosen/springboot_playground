@@ -24,5 +24,4 @@ public class Person {
     private Gender gender;
     @OneToOne(cascade = {CascadeType.ALL})
     private Location location;
-
 }

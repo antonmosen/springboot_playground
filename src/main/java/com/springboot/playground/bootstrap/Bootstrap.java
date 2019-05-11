@@ -1,5 +1,7 @@
 package com.springboot.playground.bootstrap;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.springboot.playground.entity.Location;
 import com.springboot.playground.entity.Person;
 import com.springboot.playground.enums.Gender;
@@ -7,10 +9,9 @@ import com.springboot.playground.repository.PersonRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
-import org.springframework.stereotype.Component;
 
 @Slf4j
-@Component
+//@Component
 //@Profile("!prod")
 public class Bootstrap implements CommandLineRunner {
 
@@ -31,6 +32,12 @@ public class Bootstrap implements CommandLineRunner {
             log.info("Trying to save new person ...");
             personRepository.save(person);
             log.info("New person saved ...");
+            ObjectMapper objectMapper = new ObjectMapper();
+            try {
+                System.out.println(objectMapper.writeValueAsString(person));
+            } catch (JsonProcessingException e) {
+                e.printStackTrace();
+            }
         } else {
             log.info("Test data already exist");
         }

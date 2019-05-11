@@ -1,6 +1,8 @@
 package com.springboot.playground.service;
 
+import org.springframework.http.ResponseEntity;
+
 public interface SystemService {
 
-     String healtCheck();
+     ResponseEntity healthCheck();
 }
