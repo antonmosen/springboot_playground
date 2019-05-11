@@ -1,4 +1,4 @@
-My personal Spring boot playground
+My personal Spring boot playground.
 
 ## Branches
 * master
