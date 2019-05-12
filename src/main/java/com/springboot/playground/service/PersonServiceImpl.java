@@ -9,6 +9,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 public class PersonServiceImpl implements PersonService {
 
@@ -26,9 +28,20 @@ public class PersonServiceImpl implements PersonService {
         Person savedPerson = personRepository.save(person);
 
         if (savedPerson.getId() == null) {
-            return new ResponseEntity<>("Could not save new person", HttpStatus.SERVICE_UNAVAILABLE);
+            return new ResponseEntity<Object>("Could not save new person", HttpStatus.SERVICE_UNAVAILABLE);
         }
-        return new ResponseEntity<>("Saving person was successful", HttpStatus.OK);
+        return new ResponseEntity<Object>("Saving person was successful", HttpStatus.OK);
 
+    }
+
+    @Override
+    public ResponseEntity getPersonByPersonId(Integer personId) {
+
+        Optional<Person> person = personRepository.findById(personId);
+
+        return person.<ResponseEntity>
+                map(response -> new ResponseEntity<>(
+                PersonMapper.INSTANCE.personToPersonDto(response), HttpStatus.OK))
+                .orElseGet(() -> new ResponseEntity<>("Could not find any person with id " + personId, HttpStatus.NOT_FOUND));
     }
 }
