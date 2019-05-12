@@ -28,10 +28,9 @@ public class PersonServiceImpl implements PersonService {
         Person savedPerson = personRepository.save(person);
 
         if (savedPerson.getId() == null) {
-            return new ResponseEntity<Object>("Could not save new person", HttpStatus.SERVICE_UNAVAILABLE);
+            return new ResponseEntity<Object>("Could not save new person", HttpStatus.NOT_FOUND);
         }
-        return new ResponseEntity<Object>("Saving person was successful", HttpStatus.OK);
-
+        return new ResponseEntity<Object>("Saving person was successful", HttpStatus.CREATED);
     }
 
     @Override
