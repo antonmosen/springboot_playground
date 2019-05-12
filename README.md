@@ -9,3 +9,6 @@ Helpful urls for actuator, will be updated in time.
 
 ## H2 database
 Use http://localhost:8080/h2-console to access console.
+
+## Postman
+In order to send request, you must add firstname and lastname as header.
