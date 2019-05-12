@@ -18,7 +18,6 @@ import javax.validation.constraints.NotNull;
 @Data
 public class PersonDto {
 
-
     @NotNull
     @JsonProperty("firstname")
     private String firstname;
