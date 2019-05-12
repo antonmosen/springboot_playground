@@ -9,7 +9,6 @@ import javax.validation.constraints.NotNull;
 @JsonTypeInfo(include = JsonTypeInfo.As.WRAPPER_OBJECT, use = JsonTypeInfo.Id.NAME)
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonPropertyOrder({
-
         "firstname",
         "lastname",
         "age",
