@@ -2,6 +2,7 @@ package com.springboot.playground.service;
 
 import com.springboot.playground.dto.PersonDto;
 import com.springboot.playground.entity.Person;
+import com.springboot.playground.exception.PersonNotFoundException;
 import com.springboot.playground.mapper.PersonMapper;
 import com.springboot.playground.repository.PersonRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,6 +42,6 @@ public class PersonServiceImpl implements PersonService {
         return person.<ResponseEntity>
                 map(response -> new ResponseEntity<>(
                 PersonMapper.INSTANCE.personToPersonDto(response), HttpStatus.OK))
-                .orElseGet(() -> new ResponseEntity<>("Could not find any person with id " + personId, HttpStatus.NOT_FOUND));
+                .orElseThrow(() -> new PersonNotFoundException("Person with id " + personId + " was not found"));
     }
 }
