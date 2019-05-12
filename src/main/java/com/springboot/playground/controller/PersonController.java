@@ -4,6 +4,7 @@ import com.springboot.playground.dto.PersonDto;
 import com.springboot.playground.service.PersonService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -23,14 +24,14 @@ public class PersonController {
     }
 
     @PostMapping("")
-    public ResponseEntity savePerson(@RequestBody @Valid PersonDto personDto) {
+    public ResponseEntity savePerson(@RequestBody @Valid PersonDto personDto, @RequestHeader HttpHeaders headers) {
         log.info("Saving new person ...");
         return personService.savePerson(personDto);
     }
 
     @GetMapping("/{personId}")
-    public ResponseEntity getPersonByPersonId(@PathVariable Integer personId){
-        log.info("Getting person by id : "+ personId);
+    public ResponseEntity getPersonByPersonId(@PathVariable Integer personId, @RequestHeader HttpHeaders headers) {
+        log.info("Getting person by id : " + personId);
         return personService.getPersonByPersonId(personId);
     }
 }
