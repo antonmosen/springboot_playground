@@ -8,6 +8,6 @@ import org.springframework.stereotype.Service;
 public class SystemServiceImpl implements SystemService {
     @Override
     public ResponseEntity healthCheck() {
-        return new ResponseEntity("System is up and running",HttpStatus.OK);
+        return new ResponseEntity<>("System is up and running",HttpStatus.OK);
     }
 }
