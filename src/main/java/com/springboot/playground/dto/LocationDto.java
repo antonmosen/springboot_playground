@@ -3,6 +3,8 @@ package com.springboot.playground.dto;
 import com.fasterxml.jackson.annotation.*;
 import lombok.Data;
 
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
 @JsonTypeName("location")
@@ -17,15 +19,16 @@ import javax.validation.constraints.NotNull;
 @Data
 public class LocationDto {
 
-    @NotNull
+    @NotEmpty
     @JsonProperty("country")
     private String country;
-    @NotNull
+    @NotEmpty
     @JsonProperty("cityname")
     private String cityname;
-    @NotNull
+    @NotEmpty
     @JsonProperty("streetname")
     private String streetname;
+    @Min(1)
     @NotNull
     @JsonProperty("houseNumber")
     private Integer houseNumber;

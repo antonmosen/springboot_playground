@@ -6,9 +6,12 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+
+import static org.springframework.http.HttpStatus.BAD_REQUEST;
 
 @Slf4j
 @RestController
@@ -24,7 +27,12 @@ public class PersonController {
     }
 
     @PostMapping("")
-    public ResponseEntity savePerson(@RequestBody @Valid PersonDto personDto, @RequestHeader HttpHeaders headers) {
+    public ResponseEntity savePerson(@Valid @RequestBody PersonDto personDto, BindingResult bindingResult) {
+
+        if (bindingResult.hasErrors()) {
+            return new ResponseEntity(BAD_REQUEST);
+        }
+
         log.info("Saving new person ...");
         return personService.savePerson(personDto);
     }
