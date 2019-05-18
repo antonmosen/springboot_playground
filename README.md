@@ -2,6 +2,8 @@ My personal Spring boot playground.
 
 ## Branches
 * master
+* redis
+* cache
 
 ## Actuator
 Helpful urls for actuator, will be updated in time.
