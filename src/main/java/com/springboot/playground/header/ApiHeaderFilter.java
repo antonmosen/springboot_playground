@@ -4,7 +4,6 @@ import lombok.Getter;
 import lombok.Setter;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.PropertySource;
 import org.springframework.web.filter.GenericFilterBean;
 
 import javax.servlet.FilterChain;
@@ -18,7 +17,9 @@ import java.io.IOException;
 @Configuration
 @Getter
 @Setter
-@PropertySource("classpath:application.properties")
+//@PropertySource("classpath:application.properties")
+//@EncryptablePropertySource("application.properties")
+//@EnableEncryptableProperties
 public class ApiHeaderFilter extends GenericFilterBean {
 
     @Value("${header.parameter.app.x.trace}")
