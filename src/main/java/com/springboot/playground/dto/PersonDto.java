@@ -36,6 +36,6 @@ public class PersonDto {
     private String gender;
     @NotNull
     @JsonProperty("location")
-    @Valid //Child objects needs to be annotaded with @Valid in order to be validated. See PersonController.
+    @Valid //Child objects needs to be annotated with @Valid in order to be validated. See PersonController.
     private LocationDto locationDto;
 }
