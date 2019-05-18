@@ -10,6 +10,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 
 import static org.springframework.http.HttpStatus.BAD_REQUEST;
 
@@ -37,9 +38,21 @@ public class PersonController {
         return personService.savePerson(personDto);
     }
 
+    @GetMapping("/all")
+    public ResponseEntity<List<PersonDto>> getAllPersons() {
+        log.info("Getting all persons");
+        return personService.getAllPersons();
+    }
+
     @GetMapping("/{personId}")
     public ResponseEntity getPersonByPersonId(@PathVariable Integer personId, @RequestHeader HttpHeaders headers) {
         log.info("Getting person by id : " + personId);
         return personService.getPersonByPersonId(personId);
+    }
+
+    @DeleteMapping("")
+    public ResponseEntity deleteAllPersons () {
+        log.info("Deleting all persons");
+        return personService.deleteAllPersons();
     }
 }
