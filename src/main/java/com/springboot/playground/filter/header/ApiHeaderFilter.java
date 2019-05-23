@@ -1,4 +1,4 @@
-package com.springboot.playground.header;
+package com.springboot.playground.filter.header;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -46,6 +46,7 @@ public class ApiHeaderFilter extends GenericFilterBean {
             response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "No valid header parameter : " + headerParameterAppValue);
             return;
         }
+        request.setAttribute("Test", "Teeeesting");
         filterChain.doFilter(servletRequest, servletResponse);
     }
 

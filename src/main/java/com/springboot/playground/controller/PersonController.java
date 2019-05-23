@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.util.List;
 
@@ -45,13 +46,14 @@ public class PersonController {
     }
 
     @GetMapping("/{personId}")
-    public ResponseEntity getPersonByPersonId(@PathVariable Integer personId, @RequestHeader HttpHeaders headers) {
+    public ResponseEntity getPersonByPersonId(@PathVariable Integer personId, @RequestHeader HttpHeaders headers, HttpServletRequest httpServletRequest) {
+        httpServletRequest.getSession().getAttribute("Test");
         log.info("Getting person by id : " + personId);
         return personService.getPersonByPersonId(personId);
     }
 
     @DeleteMapping("")
-    public ResponseEntity deleteAllPersons () {
+    public ResponseEntity deleteAllPersons() {
         log.info("Deleting all persons");
         return personService.deleteAllPersons();
     }
