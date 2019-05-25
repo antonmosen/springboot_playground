@@ -1,4 +1,4 @@
-package com.springboot.playground.configuration;
+package com.springboot.playground.configuration.session;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.session.data.mongo.JdkMongoSessionConverter;

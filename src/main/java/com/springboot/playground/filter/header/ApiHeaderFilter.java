@@ -1,5 +1,7 @@
 package com.springboot.playground.filter.header;
 
+import com.springboot.playground.configuration.session.PlaygroundSession;
+import com.springboot.playground.exception.PlaygroundSessionException;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.beans.factory.annotation.Value;
@@ -34,20 +36,40 @@ public class ApiHeaderFilter extends GenericFilterBean {
 
     @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
+
         HttpServletRequest request = (HttpServletRequest) servletRequest;
         HttpServletResponse response = (HttpServletResponse) servletResponse;
 
+        if (headerParamsIsInvalid(request, response)) {
+            return;
+        }
+
+
+        servletRequest.setAttribute("PLAYGROUND_SESSION", constructPlaygroundSession(servletRequest, servletResponse));
+
+        filterChain.doFilter(servletRequest, servletResponse);
+    }
+
+
+    private PlaygroundSession constructPlaygroundSession(ServletRequest servletRequest, ServletResponse servletResponse) {
+
+        System.out.println("Test");
+
+        throw new PlaygroundSessionException("Could not create session");
+    }
+
+
+    private boolean headerParamsIsInvalid(HttpServletRequest request, HttpServletResponse response) throws IOException {
         if (isNotValidCredentials(request.getHeader(headerParameterAppXTrace), appXTrace)) {
             response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "No valid header parameter : " + headerParameterAppXTrace);
-            return;
+            return true;
         }
 
         if (isNotValidCredentials(request.getHeader(headerParameterAppValue), appXValue)) {
             response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "No valid header parameter : " + headerParameterAppValue);
-            return;
+            return true;
         }
-        request.setAttribute("Test", "Teeeesting");
-        filterChain.doFilter(servletRequest, servletResponse);
+        return false;
     }
 
     private boolean isNotValidCredentials(String headerValue, String appValue) {
@@ -55,7 +77,7 @@ public class ApiHeaderFilter extends GenericFilterBean {
         if (headerValue == null || appValue == null) {
             return true;
         }
-        if ("".equals(headerValue) || "".equals(appValue)) {
+        else if ("".equals(headerValue) || "".equals(appValue)) {
             return true;
         }
         return !headerValue.equals(appValue);
