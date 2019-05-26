@@ -1,8 +1,8 @@
 package com.springboot.playground.exception;
 
 import org.springframework.boot.web.servlet.error.ErrorController;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -15,7 +15,7 @@ import javax.servlet.http.HttpServletRequest;
 * so all exceptions is created in same place.
 *
 * */
-@Controller
+@RestController
 public class GlobalErrorHandler implements ErrorController {
 
     @RequestMapping("/error")
