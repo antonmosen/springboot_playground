@@ -3,6 +3,7 @@ package com.springboot.playground;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+//@EnableMongoWebSession for reactive sessions.
 @SpringBootApplication
 public class PlaygroundApplication {
 
